@@ -12,7 +12,7 @@ source:
   sha256: 9c587f2386f1e11fe2f1fbfbcbffd191ee8dcf5cb1cd5fcd7621c2ab416a0dce
 
 build:
-  number: 0
+  number: 1
   # Upstream supports >=3.10, but requires scipy >=1.15.3 and conda-forge's
   # last scipy build for python 3.10 is 1.15.2, so the 3.10 variant is
   # unsolvable here.
@@ -29,19 +29,6 @@ requirements:
     - python
     - setuptools
     - pip
-    # not used at build time, but forces rattler-build to build all python
-    # variants of these sibling staged recipes first; its topological sort and
-    # deferred-test tracker ignore run-only dependencies / match by name only,
-    # so the test environment fails to solve otherwise. Only needed while the
-    # recipes are staged together — remove once this lives in its own feedstock.
-    - reachy-mini-motor-controller
-    - reachy-mini-rust-kinematics
-    - rustypot
-    - cv2-enumerate-cameras
-    - if: linux
-      then: pulsectl
-    - if: win
-      then: pycaw
   run:
     # Core dependencies
     - python
