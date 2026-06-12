@@ -20,6 +20,9 @@ build:
   # built per OS (noarch_platforms in conda-forge.yml), each locked to its OS
   # via a __linux/__osx/__win virtual package in the run requirements.
   noarch: python
+  # The default build string doesn't distinguish the per-OS variants, so the
+  # OS goes into it explicitly (same approach as the mne feedstock).
+  string: ${{ "linux" if linux else ("osx" if osx else "win") }}_h${{ hash }}_${{ build_number }}
   script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   python:
     entry_points:
