@@ -2,6 +2,9 @@ schema_version: 1
 
 context:
   version: "1.8.1"
+  # Upstream supports >=3.10, but requires scipy >=1.15.3 and conda-forge's
+  # last scipy build for python 3.10 is 1.15.2, so 3.10 is unsolvable here.
+  python_min: "3.11"
 
 package:
   name: reachy-mini
@@ -17,7 +20,21 @@ build:
   # last scipy build for python 3.10 is 1.15.2, so the 3.10 variant is
   # unsolvable here.
   skip: match(python, "<3.11")
-  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  # Pure python, but with OS-specific run dependencies: one noarch variant is
+  # built per OS (noarch_platforms in conda-forge.yml), each locked to its OS
+  # via a __linux/__osx/__win virtual package in the run requirements.
+  noarch: python
+  # The default build string doesn't distinguish the per-OS variants, so the
+  # OS goes into it explicitly (same approach as the mne feedstock).
+  string: ${{ "linux" if linux else ("osx" if osx else "win") }}_h${{ hash }}_${{ build_number }}
+  script:
+    # On windows, --use-deprecated=legacy-certs keeps pip from building a
+    # truststore SSL context, which reads the Windows certificate store and
+    # fails on the Azure CI runners (malformed cert in the runner's store) —
+    # the same issue documented for the skipped CLI tests below.
+    - if: win
+      then: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --use-deprecated=legacy-certs
+      else: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   python:
     entry_points:
       - reachy-mini-daemon = reachy_mini.daemon.app.main:main
@@ -26,12 +43,12 @@ build:
 
 requirements:
   host:
-    - python
+    - python ${{ python_min }}.*
     - setuptools
     - pip
   run:
     # Core dependencies
-    - python
+    - python >=${{ python_min }}
     - numpy >=2.2.5
     - scipy >=1.15.3,<2.0.0
     - reachy-mini-motor-controller >=1.5.5
@@ -76,10 +93,17 @@ requirements:
     - gradio-client
     - if: not win
       then: placo >=0.9.14
-    # Platform-specific
-      else: pycaw >=20240210
     - if: linux
-      then: pulsectl >=24.1.0
+      then:
+        - __linux
+        - pulsectl >=24.1.0
+    - if: osx
+      then:
+        - __osx
+    - if: win
+      then:
+        - __win
+        - pycaw >=20240210
     # PyPI ships a bundled gstreamer ("gstreamer-bundle") off-Linux; on conda-forge we use the
     # native gstreamer stack plus the GObject-introspection python bindings on all platforms.
     - gstreamer >=1.28.3
@@ -90,6 +114,7 @@ requirements:
 
 tests:
   - python:
+      python_version: ${{ python_min }}.*
       imports:
         - reachy_mini
       # The wheel METADATA pins several deps with == while the conda
