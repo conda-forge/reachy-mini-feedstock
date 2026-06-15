@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "1.8.1"
+  version: "1.8.2"
   # Upstream supports >=3.10, but requires scipy >=1.15.3 and conda-forge's
   # last scipy build for python 3.10 is 1.15.2, so 3.10 is unsolvable here.
   python_min: "3.11"
@@ -12,7 +12,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/r/reachy-mini/reachy_mini-${{ version }}.tar.gz
-  sha256: 06d7c3719ece81317d72b5bccb42050633119fd897a3ffd3039cd0d4b54656de
+  sha256: 215e000fc75656cdcbdcfcccacc2c5eeef9955e2f56d6744b8765ee286ff2e99
 
 build:
   number: 0
