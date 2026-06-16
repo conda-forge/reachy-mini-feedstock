@@ -91,7 +91,7 @@ requirements:
     # Sealed BLE WiFi provisioning (wifi_config.py) does X25519 + HKDF +
     # AES-GCM to keep the WiFi password off the air in cleartext. Was only
     # present transitively before; declared here now that it's a direct import.
-    - cryptography>=42.0
+    - cryptography >=42.0
 
     - if: not win
       then:
