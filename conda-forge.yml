@@ -10,3 +10,8 @@ noarch_platforms:
   - osx_64
   - win_64
 conda_install_tool: pixi
+provider:
+  linux_64: github_actions
+  win_64: github_actions
+  osx_arm64: default
+test: native_and_emulated
