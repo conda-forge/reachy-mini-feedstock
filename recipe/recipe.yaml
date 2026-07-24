@@ -2,8 +2,6 @@ schema_version: 1
 
 context:
   version: "1.9.0"
-  # Upstream supports >=3.10, but requires scipy >=1.15.3 and conda-forge's
-  # last scipy build for python 3.10 is 1.15.2, so 3.10 is unsolvable here.
   python_min: "3.11"
 
 package:
@@ -49,6 +47,7 @@ requirements:
     - scipy >=1.15.3,<2.0.0
     - reachy-mini-motor-controller >=1.5.5
     - psutil
+    - platformdirs
     - jinja2
     - uvicorn-standard
     - fastapi
@@ -80,9 +79,10 @@ requirements:
     # Extras (this package ships all optional features)
     # Upstream pins are exact (==); conda-forge lacks those exact builds, so relaxed to >=.
     - mujoco >=3.3.0
-    - onnxruntime >=1.22
+    - onnxruntime >=1.26
     - rerun-sdk >=0.29.0,<=0.31.3
     - semver
+    - cryptography >=42.0
     - pynput
     - pysoundfile
     - opencv
