@@ -7,6 +7,11 @@ conda_build:
 conda_forge_output_validation: true
 noarch_platforms:
   - linux_64
-  - osx_64
+  - osx_arm64
   - win_64
 conda_install_tool: pixi
+provider:
+  linux_64: github_actions
+  win_64: github_actions
+  osx_arm64: github_actions
+test: native_and_emulated
