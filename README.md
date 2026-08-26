@@ -49,31 +49,73 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `reachy-mini` can be installed with `conda`:
+How to use
+----------
+
+<details>
+<summary>With conda</summary>
 
 ```
 conda install reachy-mini
 ```
 
-or with `mamba`:
+</details>
+
+<details>
+<summary>With mamba</summary>
 
 ```
 mamba install reachy-mini
 ```
 
-It is possible to list all of the versions of `reachy-mini` available on your platform with `conda`:
+</details>
+
+<details>
+<summary>With pixi</summary>
+
+```
+# for adding to your local project
+pixi add reachy-mini
+# for installing globally
+pixi global install reachy-mini
+```
+
+</details>
+
+Search package versions
+-----------------------
+
+It is possible to list all of the versions of `reachy-mini` available on your platform:
+
+<details>
+<summary>With conda</summary>
 
 ```
 conda search reachy-mini --channel conda-forge
 ```
 
-or with `mamba`:
+</details>
+
+<details>
+<summary>With mamba</summary>
 
 ```
 mamba search reachy-mini --channel conda-forge
 ```
 
-Alternatively, `mamba repoquery` may provide more information:
+</details>
+
+<details>
+<summary>With pixi</summary>
+
+```
+pixi search reachy-mini --channel conda-forge
+```
+
+</details>
+
+<details>
+<summary>With mamba repoquery, which may provide more information</summary>
 
 ```
 # Search all versions available on your platform:
@@ -85,6 +127,8 @@ mamba repoquery whoneeds reachy-mini --channel conda-forge
 # List dependencies of `reachy-mini`:
 mamba repoquery depends reachy-mini --channel conda-forge
 ```
+
+</details>
 
 
 About conda-forge

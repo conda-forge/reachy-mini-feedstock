@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "1.9.0"
+  version: "1.10.0"
   python_min: "3.11"
 
 package:
@@ -10,7 +10,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/r/reachy-mini/reachy_mini-${{ version }}.tar.gz
-  sha256: 3a7e022cd585396c4b5ba7dbf356f93509cba9211bb1e06d90417dec7a3ee7cf
+  sha256: eb8e84475441dcdc0758e2f70205900a599892731e61865ad548c0657ddd88a0
 
 build:
   number: 0
@@ -55,7 +55,7 @@ requirements:
     - python-multipart >=0.0.27
     - starlette <1.0.0
     - pyserial
-    - huggingface_hub >=1.17.0,<2
+    - huggingface_hub >=1.20.1,<2
     - reachy-mini-rust-kinematics >=1.0.3
     - asgiref
     - aiohttp >=3.14.0
