@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "1.10.0"
+  version: "1.11.0"
   python_min: "3.11"
 
 package:
@@ -10,7 +10,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/r/reachy-mini/reachy_mini-${{ version }}.tar.gz
-  sha256: eb8e84475441dcdc0758e2f70205900a599892731e61865ad548c0657ddd88a0
+  sha256: 5c7634c0565485276cb8ee1a58b1cb244a740c5d7549f07bf4d4a6e9dd65ccce
 
 build:
   number: 0
