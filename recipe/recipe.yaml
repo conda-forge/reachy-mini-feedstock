@@ -115,7 +115,9 @@ requirements:
 
 tests:
   - python:
-      python_version: ${{ python_min }}.*
+      python_version:
+        - ${{ python_min }}.*
+        - "*"
       imports:
         - reachy_mini
       # The wheel METADATA pins several deps with == while the conda
